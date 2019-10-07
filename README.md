@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/thiagofarbo/api-funcionarios.svg?branch=master)](https://travis-ci.org/thiagofarbo/api-funcionarios)
+
 ## Funcionario API
 Projeto com o objetivo de criar interfaces para aplicações de front-end.
 
