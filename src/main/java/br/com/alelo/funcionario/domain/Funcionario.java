@@ -1,7 +1,6 @@
 package br.com.alelo.funcionario.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -36,7 +35,7 @@ public class Funcionario implements Serializable{
 		
 		private String cpf;
 		
-		private BigDecimal salario;
+		private Double salario;
 		
 		private LocalDate dataAdmissao;
 		

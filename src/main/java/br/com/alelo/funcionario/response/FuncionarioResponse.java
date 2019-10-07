@@ -1,7 +1,6 @@
 package br.com.alelo.funcionario.response;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -44,7 +43,7 @@ public class FuncionarioResponse  implements Serializable{
 		private String cpf;
 		
 		@ApiModelProperty(value = "Salário Funcionário", notes = "Salário do Funcionário", required = true, example = "20.000", position = 5)
-		private BigDecimal salario;
+		private Double salario;
 		
 		@ApiModelProperty(value = "Data admissão Funcionário", notes = "Data de admissão do Funcionário", required = true, example = "30-09-2019", position = 6)
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

@@ -11,9 +11,7 @@ import lombok.Getter;
 public enum StatusFuncionarioEnum {
 	
 	ATIVO("Ativo"),
-	INATIVO("Inativo"),
-	BLOQUEADO("Bloqueado"),
-	PERDA("Perda");
+	INATIVO("Inativo");
 	
 	private String descricao;
 	
