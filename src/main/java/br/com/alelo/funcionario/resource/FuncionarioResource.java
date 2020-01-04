@@ -1,5 +1,12 @@
 package br.com.alelo.funcionario.resource;
 
+import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_400;
+import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_404;
+import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_500;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +34,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_400;
-import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_404;
-import static br.com.alelo.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_500;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
-
-import javax.validation.Valid;
 
 
 @Api(value = "/funcionarios", produces = APPLICATION_JSON_UTF8_VALUE, tags = { "Funcionários" })
@@ -77,5 +78,10 @@ public class FuncionarioResource {
 	@DeleteMapping("/funcionarios/{id}")
 	public ResponseEntity<String> deletar(@PathVariable final Long id){
 	 return ResponseEntity.ok(this.funcionarioService.excluirFuncionario(id));
+	}
+	
+	@GetMapping("/excel/funcionarios")
+	public ResponseEntity<Void> obterExcel() throws Exception{
+		 return this.funcionarioService.getExcel();
 	}
 }
