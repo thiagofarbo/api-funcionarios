@@ -26,7 +26,7 @@ import lombok.Setter;
 public class Funcionario implements Serializable{
 	
 		private static final long serialVersionUID = 7682266561520420887L;
-
+		
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 	    private Long id;

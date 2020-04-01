@@ -31,7 +31,7 @@ Para acessar a base de dados, basta acessar a URL http://localhost:8080/h2/
 # Imagem docker.
 Para criar a imagem docker, basta acessar a raiz do projeto e executar o comamndo abaixo.
 
-**docker build -f Dockerfile -t api-funcionarios-0.0.1.jar**
+**docker build -f Dockerfile -t api-funcionarios-0.0.1.jar . **
 
 # Rodar a aplicação no docker
 Para rodar a imagem no docker, basta executar o comando a baixo.
