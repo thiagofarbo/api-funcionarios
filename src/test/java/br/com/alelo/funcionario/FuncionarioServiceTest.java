@@ -23,15 +23,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import br.com.alelo.funcionario.domain.Funcionario;
-import br.com.alelo.funcionario.domain.exception.NoContentCustom;
-import br.com.alelo.funcionario.domain.exception.NotFoundCustom;
-import br.com.alelo.funcionario.enums.StatusFuncionarioEnum;
-import br.com.alelo.funcionario.repository.FuncionarioRepository;
-import br.com.alelo.funcionario.request.FuncionarioRequest;
-import br.com.alelo.funcionario.request.FuncionarioRequestUpdate;
-import br.com.alelo.funcionario.response.FuncionarioResponse;
-import br.com.alelo.funcionario.service.FuncionarioService;
+import br.com.webwork.funcionario.domain.Funcionario;
+import br.com.webwork.funcionario.domain.exception.NoContentCustom;
+import br.com.webwork.funcionario.domain.exception.NotFoundCustom;
+import br.com.webwork.funcionario.enums.StatusFuncionarioEnum;
+import br.com.webwork.funcionario.repository.FuncionarioRepository;
+import br.com.webwork.funcionario.request.FuncionarioRequest;
+import br.com.webwork.funcionario.request.FuncionarioRequestUpdate;
+import br.com.webwork.funcionario.response.FuncionarioResponse;
+import br.com.webwork.funcionario.service.FuncionarioService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FuncionarioServiceTest {

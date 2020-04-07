@@ -11,9 +11,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>br.com.alelo.funcionarios</groupId>
+	<groupId>br.com.webwork</groupId>
 	<artifactId>api-funcionarios</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<name>api-funcionarios</name>
 	<description>Api de funcionarios</description>
 
