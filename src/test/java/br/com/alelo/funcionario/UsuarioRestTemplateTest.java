@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.alelo.funcionario.domain.Usuario;
 
-@SpringBootTest
+
 @RunWith(SpringRunner.class)
 public class UsuarioRestTemplateTest {
 	
