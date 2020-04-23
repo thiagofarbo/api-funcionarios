@@ -31,7 +31,6 @@ public class FuncionarioAPIRestRepository {
 		
 		this.restTemplate = restTemplate();
 		
-		
 		final FuncionarioResponse responseJson = restTemplate.getForObject(url+"/1", FuncionarioResponse.class);
 	    log.info("Funcionario: {}, status: {}", url, responseJson.getStatus());
 	    
