@@ -40,10 +40,8 @@ public class Funcionario implements Serializable{
 		@NotBlank
 		private String cpf;
 		
-		@NotBlank
 		private Double salario;
 		
-		@NotBlank
 		private LocalDate dataAdmissao;
 		
 		private LocalDate dataDemissao;

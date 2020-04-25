@@ -46,13 +46,13 @@ public class FuncionarioResponse  implements Serializable{
 		private Double salario;
 		
 		@ApiModelProperty(value = "Data admissão Funcionário", notes = "Data de admissão do Funcionário", required = true, example = "30-09-2019", position = 6)
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 		@JsonSerialize(using = LocalDateSerializer.class)
 		@JsonDeserialize(using = LocalDateDeserializer.class)
 		private LocalDate dataAdmissao;
 		
 		@ApiModelProperty(value = "Data demissão Funcionário", notes = "Data de demissão do Funcionário", required = true, example = "30-09-2020", position = 7)
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 		@JsonSerialize(using = LocalDateSerializer.class)
 		@JsonDeserialize(using = LocalDateDeserializer.class)
 		private LocalDate dataDemissao;

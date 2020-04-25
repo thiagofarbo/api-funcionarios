@@ -6,8 +6,6 @@ import static br.com.webwork.funcionario.exception.ExceptionsMessagesAleloEnum.G
 import static br.com.webwork.funcionario.exception.ExceptionsMessagesAleloEnum.GLOBAL_RESOURCE_NOT_FOUND;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -48,12 +45,12 @@ public class FuncionarioService {
 	public FuncionarioResponse salvarFuncionario(final FuncionarioRequest funcionarioRequest) {
 		
 		Funcionario funcionario = Funcionario.builder()
-				.id(funcionarioRequest.getId())
 				.nome(funcionarioRequest.getNome())
 				.cargo(funcionarioRequest.getCargo())
 				.cpf(funcionarioRequest.getCpf())
 				.salario(funcionarioRequest.getSalario())
 				.dataAdmissao(funcionarioRequest.getDataAdmissao())
+				.dataDemissao(funcionarioRequest.getDataDemissao())
 				.status(funcionarioRequest.getStatus())
 				.build();
 		

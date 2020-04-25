@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: api-funcionarios
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: api-funcionarios
@@ -14,10 +14,10 @@ spec:
         app: api-funcionarios
     spec:
       containers:
-        - name: app
-          image: thiago1432/api-funcionarios-2.0.1
+        - name: api-funcionarios
+          image: thiago1432/api-funcionarios-2.0.2
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: MONGO_URL
               value: mongodb://mongo:27017/dev
@@ -32,8 +32,7 @@ spec:
   selector:
     app: api-funcionarios
   ports:
-    - port: 80
-      targetPort: 8080
-  externalIPs:
-    - 1.2.4.120
+    - port: 8085
+      targetPort: 80
+      nodePort: 30001
   type: LoadBalancer

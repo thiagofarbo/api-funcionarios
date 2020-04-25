@@ -1,9 +1,5 @@
 package br.com.webwork.funcionario.swagger;
 
-import java.io.FileReader;
-
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,20 +23,7 @@ public class SwaggerConfig {
 	}
 	
 	public ApiInfo apiInfo(){
-		
-		Model model = this.getInfoApplication();
 		return new ApiInfoBuilder().title("Swagger API")
-				.description(model.getDescription()).version(model.getVersion()).build();
-	}
-	
-	public Model getInfoApplication() {
-		Model model = new Model();
-		MavenXpp3Reader reader = new MavenXpp3Reader();
-		try {
-			model = reader.read(new FileReader("pom.xml"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        return model;
+				.description("API Alelo Funcionários").version("1.0").build();
 	}
 }
