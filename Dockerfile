@@ -3,7 +3,7 @@ MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
 
 VOLUME /tmp
 
-COPY --from=target/*.jar /deployments/libs/*.jar api-funcionarios.jar
+COPY target/*.jar /deployments/libs/
 
 EXPOSE 8090
 
