@@ -7,7 +7,7 @@
 	<groupId>br.com.webwork</groupId>
 	<artifactId>api-funcionarios</artifactId>
 	<name>api-funcionarios</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>2.0.3-SNAPSHOT</version>
 	<description>API de Funcionários</description>
 		
 	<parent>

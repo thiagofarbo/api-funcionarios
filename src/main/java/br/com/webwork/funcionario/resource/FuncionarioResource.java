@@ -81,7 +81,7 @@ public class FuncionarioResource {
 	}
 	
 	@PatchMapping("/funcionarios/{id}")
-	@ApiOperation(value = "Atualuzar dados do funcionário")
+	@ApiOperation(value = "Atualizar dados do funcionário")
 	public ResponseEntity<FuncionarioResponse> atualizarFuncionarioParcial(@Valid @RequestBody final FuncionarioRequestUpdateParcial funcionarioRequest, @PathVariable final Long id){
 		return ResponseEntity.ok(this.funcionarioService.atualizarFuncionarioParcial(funcionarioRequest, id));
 	}
