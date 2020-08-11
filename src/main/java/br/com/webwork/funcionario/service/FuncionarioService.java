@@ -1,28 +1,27 @@
 package br.com.webwork.funcionario.service;
 
-import static br.com.webwork.funcionario.exception.ExceptionAlelo.checkThrow;
-import static br.com.webwork.funcionario.exception.ExceptionsMessagesAleloEnum.GLOBAL_BAD_REQUEST;
-import static br.com.webwork.funcionario.exception.ExceptionsMessagesAleloEnum.GLOBAL_NO_CONTENT;
-import static br.com.webwork.funcionario.exception.ExceptionsMessagesAleloEnum.GLOBAL_RESOURCE_NOT_FOUND;
+import static br.com.webwork.funcionario.exception.ExceptionCustom.checkThrow;
+import static br.com.webwork.funcionario.exception.ExceptionsMessagesEnum.GLOBAL_BAD_REQUEST;
+import static br.com.webwork.funcionario.exception.ExceptionsMessagesEnum.GLOBAL_NO_CONTENT;
+import static br.com.webwork.funcionario.exception.ExceptionsMessagesEnum.GLOBAL_RESOURCE_NOT_FOUND;
 
-import java.io.File;
+import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
-import com.google.gson.Gson;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
+import br.com.webwork.funcionario.csv.model.FuncionarioModel;
 import br.com.webwork.funcionario.domain.Funcionario;
 import br.com.webwork.funcionario.enums.StatusFuncionarioEnum;
 import br.com.webwork.funcionario.repository.FuncionarioRepository;
@@ -30,34 +29,25 @@ import br.com.webwork.funcionario.request.FuncionarioRequest;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdate;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdateParcial;
 import br.com.webwork.funcionario.response.FuncionarioResponse;
-import br.com.webwork.funcionario.rest.FuncionarioAPIRestRepository;
+import br.com.webwork.funcionario.util.Mapper;
 
 @Service
 public class FuncionarioService {
 	
 	@Autowired
-	private FuncionarioRepository funcionarioRepository;
+	private Mapper mapper;
 	
 	@Autowired
-	private FuncionarioAPIRestRepository funcionarioAPIRestRepository;
-
+	private FuncionarioRepository funcionarioRepository;
+	
 	@Transactional
 	public FuncionarioResponse salvarFuncionario(final FuncionarioRequest funcionarioRequest) {
 		
-		Funcionario funcionario = Funcionario.builder()
-				.nome(funcionarioRequest.getNome())
-				.cargo(funcionarioRequest.getCargo())
-				.cpf(funcionarioRequest.getCpf())
-				.salario(funcionarioRequest.getSalario())
-				.dataAdmissao(funcionarioRequest.getDataAdmissao())
-				.dataDemissao(funcionarioRequest.getDataDemissao())
-				.status(funcionarioRequest.getStatus())
-				.build();
+		Funcionario funcionario = mapper.mapToModel(funcionarioRequest);
 		
-		Funcionario funcionarioResponse = this.funcionarioRepository.save(funcionario);
+		Funcionario response = this.funcionarioRepository.save(funcionario);
 		
-		return builderFuncionarioResponse(funcionarioResponse);
-		
+		return mapper.mapToModelResponse(response);
 	}
 
 	public FuncionarioResponse consultarFuncionario(final Long id) {
@@ -66,8 +56,7 @@ public class FuncionarioService {
 		
 		checkThrow(!funcionario.isPresent(), GLOBAL_RESOURCE_NOT_FOUND);
 		
-		return builderFuncionarioResponse(funcionario.get());
-		
+		return mapper.mapToModelResponse(funcionario.get());
 	}
 
 	public Page<Funcionario> listarFuncionarios(final int page, final int size) {
@@ -80,25 +69,25 @@ public class FuncionarioService {
 	}
 	
 	@Transactional
-	public ResponseEntity<Void> getExcel() throws Exception {
+	public void generateCsv(HttpServletResponse response)  {
 		
-		FuncionarioResponse excelFuncionario = this.funcionarioAPIRestRepository.getExcelFuncionario();
-			Gson gson = new Gson();
-			String json = gson.toJson(excelFuncionario);
+		try {
 			
-			JsonNode jsonTree = new ObjectMapper().readTree(json);
+			StatefulBeanToCsv<FuncionarioModel> writer = new StatefulBeanToCsvBuilder<FuncionarioModel>(response.getWriter())
+	                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+	                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+	                .withOrderedResults(false)
+	                .build();	
 			
-			Builder csvSchemaBuilder = CsvSchema.builder();
-			JsonNode firstObject = jsonTree.elements().next();
-			firstObject.fieldNames().forEachRemaining(fieldName -> {csvSchemaBuilder.addColumn(fieldName);} );
-			CsvSchema csvSchema = csvSchemaBuilder.build();
+		final List<Funcionario> funcionarios = this.funcionarioRepository.findAll();
 			
-			CsvMapper csvMapper = new CsvMapper();
-			csvMapper.writerFor(FuncionarioResponse.class)
-			  .with(csvSchema)
-			  .writeValue(new File("src/main/resources/orderLines.csv"), jsonTree);
-			
-		return null;
+		final List<FuncionarioModel> models = mapper.listToFuncionarioModel(funcionarios);
+		
+		writer.write(models);
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Transactional
@@ -108,17 +97,11 @@ public class FuncionarioService {
 		
 		checkThrow(!funcionario.isPresent(), GLOBAL_RESOURCE_NOT_FOUND);
 
-		funcionario.get().setNome(funcionarioRequestUpdate.getNome());
-		funcionario.get().setCargo(funcionarioRequestUpdate.getCargo());
-		funcionario.get().setCpf(funcionarioRequestUpdate.getCpf());
-		funcionario.get().setSalario(funcionarioRequestUpdate.getSalario());
-		funcionario.get().setDataAdmissao(funcionarioRequestUpdate.getDataAdmissao());
-		funcionario.get().setDataDemissao(funcionarioRequestUpdate.getDataDemissao());
-		funcionario.get().setStatus(funcionarioRequestUpdate.getStatus());
+		Funcionario response = mapper.mapToModelUpdate(funcionarioRequestUpdate);
 		
-		Funcionario funcionarioResponse = this.funcionarioRepository.save(funcionario.get());
+		Funcionario funcionarioResponse = this.funcionarioRepository.save(response);
 		
-		return builderFuncionarioResponse(funcionarioResponse);
+		return mapper.mapToModelResponse(funcionarioResponse);
 		
 	}
 
@@ -147,35 +130,13 @@ public class FuncionarioService {
 		
 		checkThrow(!funcionario.isPresent(), GLOBAL_RESOURCE_NOT_FOUND);
 
-		funcionario.get().setNome(funcionarioRequestUpdate.getNome());
-		funcionario.get().setCargo(funcionarioRequestUpdate.getCargo());
-		funcionario.get().setCpf(funcionarioRequestUpdate.getCpf());
-		funcionario.get().setSalario(funcionarioRequestUpdate.getSalario());
-		funcionario.get().setDataAdmissao(funcionarioRequestUpdate.getDataAdmissao());
-		funcionario.get().setDataDemissao(funcionarioRequestUpdate.getDataDemissao());
-		funcionario.get().setStatus(funcionarioRequestUpdate.getStatus());
+		Funcionario response = mapper.mapToModelUpdateParcial(funcionarioRequestUpdate);
 		
-		Funcionario funcionarioResponse = this.funcionarioRepository.save(funcionario.get());
+		Funcionario funcionarioResponse = this.funcionarioRepository.save(response);
 		
-		return builderFuncionarioResponse(funcionarioResponse);
-				
+		return mapper.mapToModelResponse(funcionarioResponse);
 	}
-	
-	private FuncionarioResponse builderFuncionarioResponse(Funcionario funcionario) {
-		
-		return FuncionarioResponse.builder()
-				.id(funcionario.getId())
-				.nome(funcionario.getNome())
-				.cargo(funcionario.getCargo())
-				.cpf(funcionario.getCpf())
-				.salario(funcionario.getSalario())
-				.dataAdmissao(funcionario.getDataAdmissao())
-				.dataDemissao(funcionario.getDataDemissao())
-				.status(funcionario.getStatus())
-				.build();
-		
-	}
-	
+
 	private static StatusFuncionarioEnum mapStatusFuncionario(StatusFuncionarioEnum statusRequest) {
 	    for (StatusFuncionarioEnum status : StatusFuncionarioEnum.values()) {
 	        if (status.name().equals(statusRequest.name())) {

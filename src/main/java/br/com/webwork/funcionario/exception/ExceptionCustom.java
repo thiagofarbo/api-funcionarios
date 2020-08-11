@@ -11,20 +11,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ExceptionAlelo extends RuntimeException implements Serializable {
+public class ExceptionCustom extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private final String message;
 	private final HttpStatus status;
 
-	public ExceptionAlelo(HttpStatus status, String message) {
+	public ExceptionCustom(HttpStatus status, String message) {
 		super(message);
 		this.message = message;
 		this.status = status;
 	}
 
-	public static void checkThrow(final boolean expression, final ExceptionsMessagesAleloEnum exceptionsMessagesPoppuloEnum) {
+	public static void checkThrow(final boolean expression, final ExceptionsMessagesEnum exceptionsMessagesPoppuloEnum) {
 
 		if (expression) {
 			exceptionsMessagesPoppuloEnum.raise();

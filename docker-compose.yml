@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app:
+    container_name: api-funcionarios
+    image: thiago1432/api-funcionarios-2.0.2
+    build: ./
+    ports:
+      - 8095:8095
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    container_name: "mongodb-func"
+    ports:
+      - 27019:27017
+    environment:
+      - MONGODB_USER=admin
+      - MONGODB_PASSWORD=admin
+      - MONGODB_DB=funcionarios

@@ -23,7 +23,7 @@ public class FuncionarioAPIRestRepository {
 	    return new RestTemplate();
 	}
 	
-	@Value("${app.funcionario.host}")
+//	@Value("${app.funcionario.host}")
 	private String url; 
 	
 	

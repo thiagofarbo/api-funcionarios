@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.com.webwork.funcionario.domain.exception.BadGatewayCustom;
 import br.com.webwork.funcionario.domain.exception.BadRequestCustom;
 import br.com.webwork.funcionario.domain.exception.NoContentCustom;
 import br.com.webwork.funcionario.domain.exception.NotFoundCustom;
@@ -33,13 +34,19 @@ public class GlobalExceptionHandler {
 
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Erro interno no sistema.")
 	@ExceptionHandler({ BadRequestCustom.class })
-	public @ResponseBody ErrorInfo handleTicketHasBeenCheckedException(HttpServletRequest request, BadRequestCustom exception) {
+	public @ResponseBody ErrorInfo handlerBeenCheckedException(HttpServletRequest request, BadRequestCustom exception) {
 		return builderErrorInfo(request, exception, singletonList(exception.getMessage()));
 	}
 	
 	@ResponseStatus(value = HttpStatus.NO_CONTENT, reason = "Não existe funcionário para essa requisição.")
 	@ExceptionHandler({ NoContentCustom.class })
-	public @ResponseBody ErrorInfo handleTicketsNotFoundException(HttpServletRequest request, NoContentCustom exception) {
+	public @ResponseBody ErrorInfo handlerNotFoundException(HttpServletRequest request, NoContentCustom exception) {
+		return builderErrorInfo(request, exception, singletonList(exception.getMessage()));
+	}
+	
+	@ResponseStatus(value = HttpStatus.BAD_GATEWAY, reason = "Erro ao processar a requisição")
+	@ExceptionHandler({ BadGatewayCustom.class })
+	public @ResponseBody ErrorInfo handlerNotFoundException(HttpServletRequest request, BadGatewayCustom exception) {
 		return builderErrorInfo(request, exception, singletonList(exception.getMessage()));
 	}
 

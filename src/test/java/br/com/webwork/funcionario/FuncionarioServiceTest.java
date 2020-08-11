@@ -1,4 +1,4 @@
-package br.com.alelo.funcionario;
+package br.com.webwork.funcionario;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -49,13 +49,13 @@ public class FuncionarioServiceTest {
 	@Test
 	public void salvarFuncionarioTest() {
 		
-			Funcionario funcionario = this.builderFuncionario();
-			
-			when(funcionarioRepository.save(any(Funcionario.class))).thenReturn(funcionario);
-			
-			FuncionarioResponse funcionarioResponse = this.funcionarioService.salvarFuncionario(builderFuncionarioRequest());
-			
-			assertNotNull(funcionarioResponse);
+		Funcionario funcionario = this.builderFuncionario();
+		
+		when(funcionarioRepository.save(any(Funcionario.class))).thenReturn(funcionario);
+		
+		FuncionarioResponse funcionarioResponse = this.funcionarioService.salvarFuncionario(builderFuncionarioRequest());
+		
+		assertNotNull(funcionarioResponse);
 	}
 	
 	@Test
@@ -188,7 +188,6 @@ public class FuncionarioServiceTest {
 	private FuncionarioRequest builderFuncionarioRequest() {
 		
 		return FuncionarioRequest.builder()
-			.id(1L)
 			.nome("Jonh")
 			.cargo("Engenheiro")
 			.cpf("12344566677")

@@ -1,9 +1,14 @@
 FROM openjdk:8
 MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
+
+VOLUME /tmp
+ARG APPJAR=target/*.jar
+COPY ${APPJAR} *.jar
+RUN jar -xf ./*.jar
+
 ADD target/*.jar api-funcionarios.jar
-# EXPOSE 8090
+EXPOSE 8095
 #set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8090 || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://localhost:8095/pools || exit 1
+
 ENTRYPOINT ["java", "-jar", "api-funcionarios.jar"]

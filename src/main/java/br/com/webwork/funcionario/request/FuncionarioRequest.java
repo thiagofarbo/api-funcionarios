@@ -32,9 +32,6 @@ public class FuncionarioRequest implements Serializable{
 
 	private static final long serialVersionUID = 4641788372072003805L;
 	
-	@ApiModelProperty(value = "Id Funcionário", notes = "Identidicação do Funcionário", required = true, example = "12", position = 1)
-	private Long id;
-	
 	@ApiModelProperty(value = "Nome Funcionário", notes = "Nome do Funcionário", required = true, example = "João Pereira", position = 2)
 	private String nome;
 	
@@ -53,13 +50,13 @@ public class FuncionarioRequest implements Serializable{
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate dataAdmissao;
 	
-	@ApiModelProperty(value = "Data demissão Funcionário", notes = "Data de demissão do Funcionário",  example = "30-09-2020", position = 7)
+	@ApiModelProperty(value = "Data demissão Funcionário", notes = "Data de demissão do Funcionário",  example = "19-09-2020", position = 7)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate dataDemissao;
 	
-	@ApiModelProperty(value = "Status Funcionário", notes = "Status do Funcionário", required = true, example = "Ativo", position = 8)
+	@ApiModelProperty(value = "Status Funcionário", notes = "Status do Funcionário", required = true, example = "ATIVO", position = 8)
 	private StatusFuncionarioEnum status; 
 	
 }

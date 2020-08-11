@@ -1,4 +1,4 @@
-package br.com.alelo.funcionario;
+package br.com.webwork.funcionario;
 
 import static org.junit.Assert.assertEquals;
 

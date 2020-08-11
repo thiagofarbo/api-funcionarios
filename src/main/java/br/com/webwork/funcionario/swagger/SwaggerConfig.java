@@ -24,6 +24,6 @@ public class SwaggerConfig {
 	
 	public ApiInfo apiInfo(){
 		return new ApiInfoBuilder().title("Swagger API")
-				.description("API Alelo Funcionários").version("1.0").build();
+				.description("API Funcionários").version("1.0").build();
 	}
 }

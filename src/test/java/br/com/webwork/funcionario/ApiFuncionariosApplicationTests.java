@@ -1,4 +1,4 @@
-package br.com.alelo.funcionario;
+package br.com.webwork.funcionario;
 //package br.com.alelo.cartao;
 //
 //import org.junit.Test;

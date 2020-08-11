@@ -1,15 +1,15 @@
 package br.com.webwork.funcionario.domain.exception;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.BAD_GATEWAY;
 
 import br.com.webwork.funcionario.exception.ExceptionCustom;
 
-public class BadRequestCustom extends ExceptionCustom {
+public class BadGatewayCustom extends ExceptionCustom {
 
 	private static final long serialVersionUID = 4711372295703897008L;
 
-	public BadRequestCustom(final String message) {
-		super(BAD_REQUEST, message);
+	public BadGatewayCustom(final String message) {
+		super(BAD_GATEWAY, message);
 	}
 
 }
