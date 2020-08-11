@@ -5,11 +5,24 @@ jdk:
 services:
   - docker
 
+env:
+  global:
+    - IMAGE_NAME=thiago1432/api-funcionarios-2.0.3
+
 before_install:
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_PASSWORD" --password-stdin
+
+before_deploy:
+  - docker login -u "$DOCKER_USERNAME" -p "$REGISTRY_PASS"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
 
 deploy:
   provider: script
-  script: bash docker_push
+  script:
+  - docker build -t thiago1432/api-funcionarios-2.0.3 .
+  - docker images
+  - docker tag thiago1432/api-funcionarios-2.0.3 $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
+  - docker push $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
   on:
     branch: master
