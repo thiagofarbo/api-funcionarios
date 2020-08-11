@@ -14,8 +14,7 @@ before_install:
 
 before_deploy:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}"
-  - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}"
+  - docker tag api-funcionarios-2.0.3 thiago1432/api-funcionarios-2.0.3
 
 deploy:
   provider: script
