@@ -5,7 +5,7 @@ VOLUME /tmp
 
 ARG JAR_FILE=target/*.jar
 
-COPY ${JAR_FILE} api-funcionarios.jar
+COPY ${JAR_FILE} /deployments/libs/
 
 RUN jar -xf ./*.jar
 
