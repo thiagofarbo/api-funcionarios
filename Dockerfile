@@ -2,10 +2,10 @@ FROM openjdk:8
 MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
 
 VOLUME /tmp
-COPY target/*.jar
+
+COPY target/*.jar api-funcionarios.jar
 RUN jar -xf ./*.jar
 
-ADD target/*.jar api-funcionarios.jar
 EXPOSE 8090
 
 #set a health check
