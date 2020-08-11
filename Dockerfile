@@ -5,7 +5,7 @@ VOLUME /tmp
 
 ARG JAR_FILE=target/*.jar
 
-COPY ${JAR_FILE} /deployments/libs/
+COPY ${JAR_FILE} /deployments/libs/${JAR_FILE}
 
 RUN jar -xf ./*.jar
 
