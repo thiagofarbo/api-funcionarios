@@ -6,6 +6,7 @@ import static br.com.webwork.funcionario.exception.ExceptionsMessagesEnum.GLOBAL
 import static br.com.webwork.funcionario.exception.ExceptionsMessagesEnum.GLOBAL_RESOURCE_NOT_FOUND;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -124,15 +125,15 @@ public class FuncionarioService {
 		
 		StatusFuncionarioEnum status = mapStatusFuncionario(funcionarioRequestUpdate.getStatus());
 		
-		checkThrow(status == null, GLOBAL_BAD_REQUEST);
+		checkThrow(Objects.isNull(status), GLOBAL_BAD_REQUEST);
 		
 		Optional<Funcionario> funcionario = this.funcionarioRepository.findById(id);
 		
 		checkThrow(!funcionario.isPresent(), GLOBAL_RESOURCE_NOT_FOUND);
 
-		Funcionario response = mapper.mapToModelUpdateParcial(funcionarioRequestUpdate);
+		final Funcionario response = mapper.mapToModelUpdateParcial(funcionarioRequestUpdate);
 		
-		Funcionario funcionarioResponse = this.funcionarioRepository.save(response);
+		final Funcionario funcionarioResponse = this.funcionarioRepository.save(response);
 		
 		return mapper.mapToModelResponse(funcionarioResponse);
 	}
