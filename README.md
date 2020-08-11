@@ -81,3 +81,5 @@ curl -s -X POST \http://localhost:8090/api/funcionarios \-H 'Content-Type: appli
 	}
 
 ** @DELETE Para deletar um funcionário, apenas realize uma request para a url http://localhost:8090/api/funcionarios passando o id do funcionário
+
+** @GET Para realizar o download do csv, realize uma request para http://localhost:8090/api/excel/funcionarios
