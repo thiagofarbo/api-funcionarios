@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.alelo.funcionario.domain.Usuario;
+import br.com.webwork.funcionario.domain.Usuario;
 
 
 @RunWith(SpringRunner.class)

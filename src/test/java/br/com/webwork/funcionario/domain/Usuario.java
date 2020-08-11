@@ -1,4 +1,4 @@
-package br.com.alelo.funcionario.domain;
+package br.com.webwork.funcionario.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

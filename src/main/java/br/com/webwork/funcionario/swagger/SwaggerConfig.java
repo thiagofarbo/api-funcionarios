@@ -23,7 +23,7 @@ public class SwaggerConfig {
 	}
 	
 	public ApiInfo apiInfo(){
-		return new ApiInfoBuilder().title("Swagger API")
+		return new ApiInfoBuilder().title("Funcionário API")
 				.description("API Funcionários").version("1.0").build();
 	}
 }
