@@ -3,7 +3,10 @@ MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
 
 VOLUME /tmp
 
-ADD target/*.jar api-funcionarios.jar
+ARG JAR_FILE=target/*.jar
+
+COPY ${JAR_FILE} api-funcionarios.jar
+
 RUN jar -xf ./*.jar
 
 EXPOSE 8090
