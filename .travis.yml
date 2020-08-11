@@ -22,5 +22,7 @@ deploy:
   - docker ps -a
   - docker tag thiago1432/api-funcionarios-2.0.3 $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
   - docker push $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
+  - stage: test
+      script: docker run --rm $DOCKER_USERNAME/api-funcionarios-2.0.3 cat hello.txt
   on:
     branch: master
