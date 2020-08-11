@@ -32,13 +32,17 @@ import br.com.webwork.funcionario.request.FuncionarioRequest;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdate;
 import br.com.webwork.funcionario.response.FuncionarioResponse;
 import br.com.webwork.funcionario.service.FuncionarioService;
+import br.com.webwork.funcionario.util.Mapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FuncionarioServiceTest {
 	
-	 private final Integer PAGE = 1;
+	private final Integer PAGE = 1;
 
-     private final Integer SIZE = 50;
+    private final Integer SIZE = 50;
+     
+    @Mock
+ 	private Mapper mapper;
 	
 	@Mock
 	private FuncionarioRepository funcionarioRepository;
@@ -49,9 +53,7 @@ public class FuncionarioServiceTest {
 	@Test
 	public void salvarFuncionarioTest() {
 		
-		Funcionario funcionario = this.builderFuncionario();
-		
-		when(funcionarioRepository.save(any(Funcionario.class))).thenReturn(funcionario);
+		when(mapper.mapToModelResponse(any())).thenReturn(builderFuncionarioResponse());
 		
 		FuncionarioResponse funcionarioResponse = this.funcionarioService.salvarFuncionario(builderFuncionarioRequest());
 		
@@ -60,6 +62,8 @@ public class FuncionarioServiceTest {
 	
 	@Test
 	public void consultarFuncionario() {
+		
+		when(mapper.mapToModelResponse(any())).thenReturn(builderFuncionarioResponse());
 		
 		when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(builderFuncionario()));
 		
@@ -109,6 +113,8 @@ public class FuncionarioServiceTest {
 		
 		Funcionario builderFuncionario = this.builderFuncionario();
 		
+		when(mapper.mapToModelUpdate(any(FuncionarioRequestUpdate.class))).thenReturn(builderFuncionario);
+		
 		when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(builderFuncionario));
 		
 		when(funcionarioRepository.save(any(Funcionario.class))).thenReturn(builderFuncionario);
@@ -155,7 +161,9 @@ public class FuncionarioServiceTest {
 	public void atualizarFuncionarioComIdNull() {
 		
 		FuncionarioRequestUpdate funcionarioRequest = FuncionarioRequestUpdate.builder()
+			.nome("Jonh")
 			.cargo("Engenheiro")
+			.cpf("12344566677")
 			.dataAdmissao(LocalDate.now())	
 			.dataDemissao(LocalDate.now())
 			.status(StatusFuncionarioEnum.INATIVO).build();
@@ -179,6 +187,7 @@ public class FuncionarioServiceTest {
 		
 		return FuncionarioRequestUpdate.builder()
 			.nome("Jonh")
+			.cpf("12344566677")
 			.cargo("Engenheiro")
 			.dataAdmissao(LocalDate.now())	
 			.dataDemissao(LocalDate.now())
@@ -194,6 +203,16 @@ public class FuncionarioServiceTest {
 			.dataAdmissao(LocalDate.now())	
 			.dataDemissao(LocalDate.now())
 			.status(StatusFuncionarioEnum.ATIVO).build();
-
+	}
+	
+	private FuncionarioResponse builderFuncionarioResponse() {
+		
+		return FuncionarioResponse.builder()
+			.nome("Jonh")
+			.cargo("Engenheiro")
+			.cpf("12344566677")
+			.dataAdmissao(LocalDate.now())	
+			.dataDemissao(LocalDate.now())
+			.status(StatusFuncionarioEnum.ATIVO).build();
 	}
 }
