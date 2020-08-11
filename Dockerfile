@@ -5,6 +5,8 @@ VOLUME /tmp
 
 COPY target/*.jar /deployments/libs/target/*.jar
 
+RUN jar -xf ./*.jar
+
 EXPOSE 8090
 
 #set a health check
