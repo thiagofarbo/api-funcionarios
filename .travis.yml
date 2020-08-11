@@ -14,8 +14,8 @@ before_install:
 
 before_deploy:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
+  - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}"
+  - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}"
 
 deploy:
   provider: script
