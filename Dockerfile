@@ -7,8 +7,6 @@ ARG JAR_FILE=target/*.jar
 
 COPY ${JAR_FILE} /deployments/libs/${JAR_FILE}
 
-RUN jar -xf ./*.jar
-
 EXPOSE 8090
 
 #set a health check
