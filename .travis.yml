@@ -18,7 +18,6 @@ before_deploy:
 deploy:
   provider: script
   script:
-  - docker build -t thiago1432/api-funcionarios-2.0.3 .
   - docker images
   - docker tag thiago1432/api-funcionarios-2.0.3 $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
   - docker push $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
