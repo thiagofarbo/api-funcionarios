@@ -27,12 +27,12 @@ import br.com.webwork.funcionario.domain.Funcionario;
 import br.com.webwork.funcionario.domain.exception.NoContentCustom;
 import br.com.webwork.funcionario.domain.exception.NotFoundCustom;
 import br.com.webwork.funcionario.enums.StatusFuncionarioEnum;
+import br.com.webwork.funcionario.mapper.Mapper;
 import br.com.webwork.funcionario.repository.FuncionarioRepository;
 import br.com.webwork.funcionario.request.FuncionarioRequest;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdate;
 import br.com.webwork.funcionario.response.FuncionarioResponse;
 import br.com.webwork.funcionario.service.FuncionarioService;
-import br.com.webwork.funcionario.util.Mapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FuncionarioServiceTest {

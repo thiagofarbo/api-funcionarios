@@ -24,12 +24,12 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import br.com.webwork.funcionario.csv.model.FuncionarioModel;
 import br.com.webwork.funcionario.domain.Funcionario;
 import br.com.webwork.funcionario.enums.StatusFuncionarioEnum;
+import br.com.webwork.funcionario.mapper.Mapper;
 import br.com.webwork.funcionario.repository.FuncionarioRepository;
 import br.com.webwork.funcionario.request.FuncionarioRequest;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdate;
 import br.com.webwork.funcionario.request.FuncionarioRequestUpdateParcial;
 import br.com.webwork.funcionario.response.FuncionarioResponse;
-import br.com.webwork.funcionario.util.Mapper;
 
 @Service
 public class FuncionarioService {

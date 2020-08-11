@@ -1,4 +1,4 @@
-package br.com.webwork.funcionario.util;
+package br.com.webwork.funcionario.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
