@@ -3,7 +3,7 @@ MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
 
 VOLUME /tmp
 
-COPY target/*.jar api-funcionarios.jar
+ADD target/*.jar api-funcionarios.jar
 RUN jar -xf ./*.jar
 
 EXPOSE 8090
