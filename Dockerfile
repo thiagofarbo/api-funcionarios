@@ -2,8 +2,7 @@ FROM openjdk:8
 MAINTAINER Thiago Emidio <thiagofarbo@gmail.com>
 
 VOLUME /tmp
-ARG APPJAR=target/*.jar
-COPY ${APPJAR} *.jar
+COPY target/*.jar
 RUN jar -xf ./*.jar
 
 ADD target/*.jar api-funcionarios.jar
