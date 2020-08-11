@@ -13,7 +13,7 @@ before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_PASSWORD" --password-stdin
 
 before_deploy:
-  - docker login -u "$DOCKER_USERNAME" -p "$REGISTRY_PASS"
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
   - docker tag "$IMAGE_NAME" "${IMAGE_NAME}"
 
