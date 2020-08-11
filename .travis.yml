@@ -19,6 +19,7 @@ deploy:
   provider: script
   script:
   - docker images
+  - docker ps -a
   - docker tag thiago1432/api-funcionarios-2.0.3 $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
   - docker push $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
   on:
