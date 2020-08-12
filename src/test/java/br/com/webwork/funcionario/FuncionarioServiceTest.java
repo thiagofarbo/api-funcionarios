@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -141,9 +140,9 @@ public class FuncionarioServiceTest {
 		
 		when(funcionarioRepository.findById(anyLong())).thenReturn(Optional.of(builderCartao));
 		
-		String response = this.funcionarioService.excluirFuncionario(1L);
+		this.funcionarioService.excluirFuncionario(1L);
 		
-		Assert.assertNotNull(response);
+		verify(funcionarioRepository, times(1)).findById(anyLong());
 	}
 	
 	@Test(expected = NotFoundCustom.class)

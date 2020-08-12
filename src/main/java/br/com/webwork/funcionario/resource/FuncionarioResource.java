@@ -1,5 +1,7 @@
 package br.com.webwork.funcionario.resource;
 
+import static br.com.webwork.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_202;
+import static br.com.webwork.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_204;
 import static br.com.webwork.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_400;
 import static br.com.webwork.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_404;
 import static br.com.webwork.funcionario.exception.GlobalExceptionHandler.MENSAGEM_GLOBAL_500;
@@ -41,7 +43,10 @@ import io.swagger.annotations.ApiResponses;
 
 @Api(value = "/funcionarios", tags = { "Funcionários" })
 @ApiOperation(value = "funcionarios", notes = "API de Funcionários", response = FuncionarioResource.class)
-@ApiResponses({ @ApiResponse(code = 400, message = MENSAGEM_GLOBAL_400, response = ErrorInfo.class),
+@ApiResponses({ 
+		@ApiResponse(code = 202, message = MENSAGEM_GLOBAL_202, response = ErrorInfo.class),
+		@ApiResponse(code = 204, message = MENSAGEM_GLOBAL_204, response = ErrorInfo.class),
+	    @ApiResponse(code = 400, message = MENSAGEM_GLOBAL_400, response = ErrorInfo.class),
 		@ApiResponse(code = 404, message = MENSAGEM_GLOBAL_404, response = ErrorInfo.class),
 		@ApiResponse(code = 500, message = MENSAGEM_GLOBAL_500, response = ErrorInfo.class) })
 @CrossOrigin(origins = "*")
@@ -88,8 +93,11 @@ public class FuncionarioResource {
 	
 	@DeleteMapping("/funcionarios/{id}")
 	@ApiOperation(value = "Deletar funcionário")
-	public ResponseEntity<String> deletar(@PathVariable final Long id){
-		return ResponseEntity.ok(this.funcionarioService.excluirFuncionario(id));
+	public ResponseEntity<Void> deletar(@PathVariable final Long id){
+		
+		this.funcionarioService.excluirFuncionario(id);
+		
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/excel/funcionarios")

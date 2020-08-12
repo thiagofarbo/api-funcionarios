@@ -1,24 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    app: demo
-  name: demo
-spec:
-  replicas: 1
+metadata: 
+  name: api-funcionarios-v2
+spec: 
   selector:
     matchLabels:
-      app: demo
-  strategy: {}
+      app: api-funcionarios-v2
   template:
     metadata:
-      creationTimestamp: null
+      #creationTimestamp: null
       labels:
-        app: demo
+        app: api-funcionarios-v2
     spec:
       containers:
-      - image: thiago1432/api-funcionarios-2.0.2
-        name: api-funcionarios-2.0.2
-        resources: {}
-status: {}
+        - name: api-funcionarios
+          image: thiago1432/api-funcionarios-2.0.2
+          ports: 
+          - containerPort: 80
+#        resources: {}
+#status: {}

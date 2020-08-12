@@ -18,7 +18,7 @@ public enum ExceptionsMessagesEnum {
 	GLOBAL_INTERNAL_SERVER_ERROR(INTERNAL_SERVER_ERROR.value(), "Internal Server Error", ExceptionCustom.class),
 	GLOBAL_BAD_REQUEST(BAD_REQUEST.value(), "Erro interno no sistema.", BadRequestCustom.class),
 	GLOBAL_NO_CONTENT(NO_CONTENT.value(), "Não existe conteudo para essa requisição.", NoContentCustom.class),
-	GLOBAL_RESOURCE_NOT_FOUND(NOT_FOUND.value(), "Item não existe", NotFoundCustom.class);
+	GLOBAL_RESOURCE_NOT_FOUND(NOT_FOUND.value(), "Registro não encontrado", NotFoundCustom.class);
 
 	private Integer code;
 

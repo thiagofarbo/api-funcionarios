@@ -21,6 +21,7 @@ import br.com.webwork.funcionario.domain.exception.NotFoundCustom;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
+	 public static final String MENSAGEM_GLOBAL_202 = "Atualizado";
 	 public static final String MENSAGEM_GLOBAL_204 = "Nenhum conteúdo.";	
      public static final String MENSAGEM_GLOBAL_400 = "Requisição inválida.";
      public static final String MENSAGEM_GLOBAL_404 = "Recurso não encontrado.";

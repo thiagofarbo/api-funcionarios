@@ -1,39 +1,39 @@
-# ... Deployment YAML definition
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: api-funcionarios-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: api-funcionarios
-  template:
-    metadata:
-      labels:
-        app: api-funcionarios
-    spec:
-      containers:
-        - name: api-funcionarios
-          image: thiago1432/api-funcionarios-2.0.2
-          ports:
-            - containerPort: 80
-          env:
-            - name: MONGO_URL
-              value: mongodb://mongo:27017/funcionarios
-          imagePullPolicy: Always
----
-# ... Service YAML definition
-apiVersion: v1
-kind: Service
-metadata:
-  name: api-funcionarios-service
-spec:
-  type: NodePort
-  selector:
-    app: api-funcionarios
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8095
-      nodePort: 30888
+## ... Deployment YAML definition
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: api-funcionarios-deployment
+#spec:
+#  replicas: 3
+#  selector:
+#    matchLabels:
+#      app: api-funcionarios
+#  template:
+#    metadata:
+#      labels:
+#        app: api-funcionarios
+#    spec:
+#      containers:
+#        - name: api-funcionarios
+#          image: thiago1432/api-funcionarios-2.0.2
+#          ports:
+#            - containerPort: 80
+#          env:
+#            - name: MONGO_URL
+#              value: mongodb://mongo:27017/funcionarios
+#          imagePullPolicy: Always
+#---
+## ... Service YAML definition
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: api-funcionarios-service
+#spec:
+#  type: NodePort
+#  selector:
+#    app: api-funcionarios
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 8095
+#      nodePort: 30888

@@ -107,15 +107,14 @@ public class FuncionarioService {
 	}
 
 	@Transactional
-	public String excluirFuncionario(final Long id) {
+	public void excluirFuncionario(final Long id) {
 		
 		Optional<Funcionario> funcionario = this.funcionarioRepository.findById(id);
 		
 		checkThrow(!funcionario.isPresent(), GLOBAL_RESOURCE_NOT_FOUND);
 		
 		this.funcionarioRepository.deleteById(id);
-		
-		return "Funcionário com o id "+id.toString() + " foi deletado com sucesso.";	
+	
 	}
 	
 	@Transactional
