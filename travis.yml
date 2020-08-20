@@ -1,0 +1,33 @@
+language: java
+jdk:
+  - openjdk8
+cache:
+  directories:
+  - "$HOME/.cache"
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_NAME=thiago1432/api-funcionarios-2.0.3
+
+before_install:
+  - cp .travis.settings.xml $HOME/.m2/settings.xml
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+before_deploy:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker build -t thiago1432/api-funcionarios .
+
+deploy:
+  provider: script
+  script: "mvn -B -V deploy"
+  skip_cleanup: true
+    - docker images
+    - docker ps -a
+    - docker tag thiago1432/api-funcionarios-2.0.3 $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
+    - docker push $DOCKER_USERNAME/thiago1432/api-funcionarios-2.0.3
+  script: docker run --rm thiago1432/api-funcionarios
+  on:
+    branch: master
